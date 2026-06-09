@@ -1,0 +1,128 @@
+{
+  "歴史": [
+    {
+      "id": 1,
+      "question": "日本の初代天皇とされているのは誰でしょう？",
+      "answer": "神武天皇",
+      "explanation": "神武天皇は日本の初代天皇とされており、紀元前660年に即位したとされています。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 2,
+      "question": "1603年に江戸幕府を開いた武将は？",
+      "answer": "徳川家康",
+      "explanation": "徳川家康は関ヶ原の戦いに勝利後、1603年に江戸幕府を開き、265年続く江戸時代の基礎を築きました。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 3,
+      "question": "第二次世界大戦が終結した年は？",
+      "answer": "1945年",
+      "explanation": "第二次世界大戦は1945年8月15日の終戦の日をもって終結しました。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 4,
+      "question": "明治維新が起こった年は？",
+      "answer": "1868年",
+      "explanation": "明治維新は1868年に起こり、江戸時代から明治時代への転換点となりました。",
+      "difficulty": "中級",
+      "creator": "AI"
+    },
+    {
+      "id": 5,
+      "question": "日本で最初の元号は？",
+      "answer": "大化",
+      "explanation": "大化は645年に制定された日本最初の元号で、大化の改新とともに始まりました。",
+      "difficulty": "中級",
+      "creator": "AI"
+    }
+  ],
+  "科学": [
+    {
+      "id": 6,
+      "question": "水の化学式は？",
+      "answer": "H2O",
+      "explanation": "水は水素原子2個と酸素原子1個で構成され、化学式はH2Oと表されます。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 7,
+      "question": "光の速度は秒速約何万キロメートル？",
+      "answer": "30万",
+      "explanation": "光の速度は真空中で秒速約299,792,458メートル、約30万キロメートルです。",
+      "difficulty": "中級",
+      "creator": "AI"
+    },
+    {
+      "id": 8,
+      "question": "人間の染色体の数は？",
+      "answer": "46",
+      "explanation": "人間の染色体は23対46本あり、両親から23本ずつ受け継がれます。",
+      "difficulty": "中級",
+      "creator": "AI"
+    },
+    {
+      "id": 9,
+      "question": "元素記号でAuは何の元素？",
+      "answer": "金",
+      "explanation": "Auは金の元素記号で、ラテン語のaurum（オーラム）に由来します。",
+      "difficulty": "中級",
+      "creator": "AI"
+    },
+    {
+      "id": 10,
+      "question": "地球の大気の約78%を占める気体は？",
+      "answer": "窒素",
+      "explanation": "地球の大気は約78%が窒素、約21%が酸素で構成されています。",
+      "difficulty": "初級",
+      "creator": "AI"
+    }
+  ],
+  "芸能": [
+    {
+      "id": 11,
+      "question": "日本のアニメ映画で最も興行収入が高い作品は？",
+      "answer": "鬼滅の刃 無限列車編",
+      "explanation": "2020年に公開された「鬼滅の刃 無限列車編」は日本のアニメ映画史上最高の興行収入を記録しました。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 12,
+      "question": "ジブリ映画「となりのトトロ」の監督は？",
+      "answer": "宮崎駿",
+      "explanation": "宮崎駿は多くのジブリ作品を手がけた著名なアニメーション監督です。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 13,
+      "question": "日本の国民的アイドルグループAKB48の拠点となった劇場がある場所は？",
+      "answer": "秋葉原",
+      "explanation": "AKB48は秋葉原のAKB48劇場を拠点として活動を開始しました。",
+      "difficulty": "初級",
+      "creator": "AI"
+    },
+    {
+      "id": 14,
+      "question": "日本の伝統芸能「歌舞伎」で女性の役を演じる男性俳優を何という？",
+      "answer": "女形",
+      "explanation": "歌舞伎では男性俳優が女性役を演じ、これを女形（おんながた）と呼びます。",
+      "difficulty": "中級",
+      "creator": "AI"
+    },
+    {
+      "id": 15,
+      "question": "「世界の黒澤」と呼ばれた日本の映画監督は？",
+      "answer": "黒澤明",
+      "explanation": "黒澤明は「七人の侍」「羅生門」など多くの名作を生み出し、世界的に評価された映画監督です。",
+      "difficulty": "中級",
+      "creator": "AI"
+    }
+  ]
+}
