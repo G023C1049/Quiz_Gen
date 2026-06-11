@@ -1,4 +1,4 @@
-# Quiz GēN 🎯
+# Quiz GēN 
 
 **Google Gemini AI がリアルタイムで問題を生成する、日本語クイズアプリです。**
 
@@ -7,13 +7,13 @@
 [![Gemini API](https://img.shields.io/badge/Gemini_API-2.5_Flash-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com/)
 
-🔗 **[デモを試す → quiz-gen.vercel.app](https://develop-2.vercel.app)**
+🔗 **[デモを試す](https://develop-2.vercel.app)**
 
 > ⚠️ デモ版のため、1日あたり **5回** まで無料でプレイできます。
 
 ---
 
-## 📸 スクリーンショット
+##  スクリーンショット
 
 | タイトル画面 | モード選択 | ゲーム画面 |
 |:---:|:---:|:---:|
@@ -22,7 +22,7 @@
 
 ---
 
-## 🎮 機能一覧
+##  機能一覧
 
 | 機能 | 内容 |
 |------|------|
@@ -38,11 +38,11 @@
 
 ---
 
-## 🌟 こだわった点
+##  こだわった点
 
 ### 1. AI によるリアルタイム問題生成
 毎回 Gemini AI が問題を生成するため、**問題が尽きることがありません**。  
-カスタムトピックに「推しのアーティスト名」や「好きなゲーム」を入力すれば、世界に一つだけのクイズを楽しめます。
+カスタムトピックに「推しのアーティスト名」や「好きなゲーム」を入力すれば、好みのクイズを楽しめます。
 
 ### 2. 段階的回答判定システム（SmartJudge）
 
@@ -76,7 +76,7 @@ LocalStorage に累計戦績を保存し、タイトル画面に **レーダー�
 
 ---
 
-## ⚙️ 技術スタック
+##  技術スタック
 
 | カテゴリ | 技術 | 用途 |
 |--------|------|------|
@@ -86,7 +86,7 @@ LocalStorage に累計戦績を保存し、タイトル画面に **レーダー�
 | **AI** | Google Gemini API | 問題生成・回答判定 |
 | **グラフ** | Chart.js / react-chartjs-2 | レーダーチャート |
 | **アイコン** | Lucide React | UI アイコン |
-| **音声** | Web Audio API | 効果音（外部ファイル不要） |
+| **音声** | Web Audio API | 効果音 |
 | **データ永続化** | LocalStorage | 統計データの保存 |
 | **デプロイ** | Vercel | ホスティング |
 
@@ -135,11 +135,10 @@ echo REACT_APP_GEMINI_API_KEY=your_api_key_here > .env
 npm start
 ```
 
-> **Gemini API キーの取得**：[Google AI Studio](https://aistudio.google.com/app/apikey) で無料で発行できます。
 
 ---
 
-## 😓 苦労した点
+##  苦労した点
 
 **回答判定の精度**  
 テキスト入力式は「○○市」「○○（人名）」など表記が多様なため、単純な文字列比較では誤判定が多発。キーワード抽出・正規化・AI判定を組み合わせることで解決しました。
@@ -159,6 +158,7 @@ Create React App の `REACT_APP_` プレフィックスのルールを理解し�
 - [ ] 問題履歴・復習モード
 - [ ] オンラインランキング機能
 - [ ] PWA対応（オフラインプレイ）
+- [ ] マルチプレイヤー機能の実装
 
 ---
 
