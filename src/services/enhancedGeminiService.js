@@ -6,16 +6,20 @@ const genreList = ['雑学', 'アニメ', '映画', '歌詞', '歴史', '観光�
 
 // モデルの優先順位（上位から下位へ）
 const MODEL_HIERARCHY = [
-  { name: 'gemini-2.5-pro', displayName: 'Gemini 2.5 Pro' },
-  { name: 'gemini-2.5-flash', displayName: 'Gemini 2.5 Flash' }
+  { name: 'gemini-2.5-flash', displayName: 'Gemini 2.5 Flash' },
+  { name: 'gemini-2.0-flash', displayName: 'Gemini 2.0 Flash' },
+  { name: 'gemini-1.5-flash', displayName: 'Gemini 1.5 Flash' },
 ];
 
-// レート制限エラーのパターン
+// レート制限エラーのパターン（503=高負荷も再試行対象に追加）
 const RATE_LIMIT_PATTERNS = [
   /quota.*exceeded/i,
   /rate.*limit/i,
   /too.*many.*requests/i,
-  /429/
+  /429/,
+  /503/,
+  /UNAVAILABLE/i,
+  /high demand/i,
 ];
 
 // レート制限チェック関数
