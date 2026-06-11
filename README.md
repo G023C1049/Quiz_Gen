@@ -17,6 +17,7 @@
 
 | タイトル画面 | モード選択 | ゲーム画面 |
 |:---:|:---:|:---:|
+| ![タイトル画面](docs/screenshots/title.png) | ![モード選択](docs/screenshots/mode.png) | ![ゲーム画面](docs/screenshots/game.png) |
 | レーダーチャートで成長記録 | ジャンル選択 / おまかせ | 60秒タイマー＋テキスト入力 |
 
 ---
