@@ -49,7 +49,7 @@ export default function ModeSelectScreen({
             startGame({ genreMode: false });
           }}
         >
-          🔄 普通モード（ジャンルミックス）
+          🎲 おまかせモード
         </button>
       </div>
 
