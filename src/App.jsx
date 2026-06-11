@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { generateBatchQuestionsWithAI } from './services/enhancedGeminiService';
+import { canPlay, incrementUsage, getRemainingCount } from './utils/usageLimit';
 
 // 各画面コンポーネント（既存のものを使用）
 import TitleScreen from './components/TitleScreen';
@@ -10,6 +11,7 @@ import GenreSelection from './components/GenreSelection';
 import GeneratingScreen from './components/GeneratingScreen';
 import GameScreen from './components/GameScreen';
 import ResultScreen from './components/ResultScreen';
+import LimitModal from './components/LimitModal';
 
 const genreList = ['雑学', 'アニメ', '映画', '歌詞', '歴史', '観光地'];
 
@@ -36,6 +38,10 @@ export default function App() {
   // 設定
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [userGenreStats, setUserGenreStats] = useState({});
+
+  // 回数制限
+  const [showLimitModal, setShowLimitModal] = useState(false);
+  const [remainingCount, setRemainingCount] = useState(getRemainingCount());
 
   // LocalStorageから統計データを読み込み
   useEffect(() => {
@@ -87,6 +93,8 @@ export default function App() {
           break;
         case 'start':
           oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+          break;
+        default:
           break;
       }
       
@@ -146,7 +154,17 @@ export default function App() {
 
   // ゲーム開始（一括問題生成対応）
   const startGame = async ({ genreMode = false, genre = '', topic = '' }) => {
+    // 回数制限チェック
+    if (!canPlay()) {
+      setShowLimitModal(true);
+      return;
+    }
+
     try {
+      // プレイ回数をカウントアップ
+      incrementUsage();
+      setRemainingCount(getRemainingCount());
+
       setCurrentScreen('generating');
       
       // 生成パラメータの設定
@@ -201,105 +219,119 @@ export default function App() {
   };
 
   // 画面別レンダリング
-  switch (currentScreen) {
-    case 'title':
-      return (
-        <TitleScreen
-          setCurrentScreen={setCurrentScreen}
-          soundEnabled={soundEnabled}
-          setSoundEnabled={setSoundEnabled}
-          userGenreStats={userGenreStats}
-          genreList={genreList}
-        />
-      );
+  const renderScreen = () => {
+    switch (currentScreen) {
+      case 'title':
+        return (
+          <TitleScreen
+            setCurrentScreen={setCurrentScreen}
+            soundEnabled={soundEnabled}
+            setSoundEnabled={setSoundEnabled}
+            userGenreStats={userGenreStats}
+            genreList={genreList}
+            remainingCount={remainingCount}
+          />
+        );
 
-    case 'modeSelect':
-      return (
-        <ModeSelectScreen
-          setCurrentScreen={setCurrentScreen}
-          playSound={playSound}
-          setPlayMode={setPlayMode}
-          onSelectMode={onSelectMode}
-        />
-      );
+      case 'modeSelect':
+        return (
+          <ModeSelectScreen
+            setCurrentScreen={setCurrentScreen}
+            playSound={playSound}
+            setPlayMode={setPlayMode}
+            onSelectMode={onSelectMode}
+            remainingCount={remainingCount}
+          />
+        );
 
-    case 'genreSelection':
-      return (
-        <GenreSelection
-          setCurrentScreen={setCurrentScreen}
-          setSelectedGenre={setSelectedGenre}
-          setCustomTopic={setCustomTopic}
-          playSound={playSound}
-          onSelect={onGenreSelect}
-        />
-      );
+      case 'genreSelection':
+        return (
+          <GenreSelection
+            setCurrentScreen={setCurrentScreen}
+            setSelectedGenre={setSelectedGenre}
+            setCustomTopic={setCustomTopic}
+            playSound={playSound}
+            onSelect={onGenreSelect}
+          />
+        );
 
-    case 'generating':
-      return (
-        <GeneratingScreen
-          customTopic={customTopic}
-          selectedGenre={selectedGenre}
-        />
-      );
+      case 'generating':
+        return (
+          <GeneratingScreen
+            customTopic={customTopic}
+            selectedGenre={selectedGenre}
+          />
+        );
 
-    case 'game':
-      return (
-        <GameScreen
-          currentQuestions={currentQuestions}
-          currentQuestion={currentQuestion}
-          setCurrentQuestion={setCurrentQuestion}
-          setCurrentQuestions={setCurrentQuestions}
-          score={score}
-          setScore={setScore}
-          playMode={playMode}
-          userAnswer={userAnswer}
-          setUserAnswer={setUserAnswer}
-          showResult={showResult}
-          setShowResult={setShowResult}
-          gameActive={gameActive}
-          setGameActive={setGameActive}
-          timeLeft={timeLeft}
-          setTimeLeft={setTimeLeft}
-          soundEnabled={soundEnabled}
-          playSound={playSound}
-          setCurrentScreen={setCurrentScreen}
-          setGameResults={setGameResults}
-          totalQuestions={totalQuestions}
-          customTopic={customTopic}
-          selectedGenre={selectedGenre}
-          recordGenreStat={recordGenreStat}
-          generateNextQuestion={generateNextQuestion}
-        />
-      );
+      case 'game':
+        return (
+          <GameScreen
+            currentQuestions={currentQuestions}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
+            setCurrentQuestions={setCurrentQuestions}
+            score={score}
+            setScore={setScore}
+            playMode={playMode}
+            userAnswer={userAnswer}
+            setUserAnswer={setUserAnswer}
+            showResult={showResult}
+            setShowResult={setShowResult}
+            gameActive={gameActive}
+            setGameActive={setGameActive}
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            soundEnabled={soundEnabled}
+            playSound={playSound}
+            setCurrentScreen={setCurrentScreen}
+            setGameResults={setGameResults}
+            totalQuestions={totalQuestions}
+            customTopic={customTopic}
+            selectedGenre={selectedGenre}
+            recordGenreStat={recordGenreStat}
+            generateNextQuestion={generateNextQuestion}
+          />
+        );
 
-    case 'result':
-      return (
-        <ResultScreen
-          gameResults={gameResults}
-          playMode={playMode}
-          selectedGenre={selectedGenre}
-          customTopic={customTopic}
-          resetGame={resetGame}
-          playSound={playSound}
-          setCurrentScreen={setCurrentScreen}
-          userGenreStats={userGenreStats}
-          genreList={genreList}
-        />
-      );
+      case 'result':
+        return (
+          <ResultScreen
+            gameResults={gameResults}
+            playMode={playMode}
+            selectedGenre={selectedGenre}
+            customTopic={customTopic}
+            resetGame={resetGame}
+            playSound={playSound}
+            setCurrentScreen={setCurrentScreen}
+            userGenreStats={userGenreStats}
+            genreList={genreList}
+          />
+        );
 
-    default:
-      return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-          <div className="text-center">
-            <h1 className="text-2xl mb-4">画面エラー</h1>
-            <button 
-              onClick={resetGame}
-              className="bg-blue-500 px-6 py-2 rounded hover:bg-blue-600"
-            >
-              タイトルに戻る
-            </button>
+      default:
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+            <div className="text-center">
+              <h1 className="text-2xl mb-4">画面エラー</h1>
+              <button 
+                onClick={resetGame}
+                className="bg-blue-500 px-6 py-2 rounded hover:bg-blue-600"
+              >
+                タイトルに戻る
+              </button>
+            </div>
           </div>
-        </div>
-      );
-  }
+        );
+    }
+  };
+
+  return (
+    <>
+      {/* 回数制限モーダル（どの画面上でも表示） */}
+      {showLimitModal && (
+        <LimitModal onClose={() => setShowLimitModal(false)} />
+      )}
+      {renderScreen()}
+    </>
+  );
 }

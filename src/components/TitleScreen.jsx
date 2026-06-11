@@ -7,7 +7,8 @@ export default function TitleScreen({
   soundEnabled,
   setSoundEnabled,
   userGenreStats,
-  genreList
+  genreList,
+  remainingCount
 }) {
   // レーダーチャート用データ作成
   const genres = genreList;
@@ -48,10 +49,28 @@ export default function TitleScreen({
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-sky-900 via-indigo-900 to-teal-900">
-      <h1 className="text-5xl font-bold text-white mb-6 tracking-widest">Quiz GēN</h1>
+      <h1 className="text-5xl font-bold text-white mb-4 tracking-widest">Quiz GēN</h1>
+
+      {/* 残り回数バッジ */}
+      <div className="mb-4 flex items-center gap-2">
+        <span
+          className="px-4 py-1 rounded-full text-sm font-bold"
+          style={{
+            backgroundColor: remainingCount > 0 ? 'rgba(52,211,153,0.2)' : 'rgba(239,68,68,0.2)',
+            border: `1px solid ${remainingCount > 0 ? 'rgba(52,211,153,0.6)' : 'rgba(239,68,68,0.6)'}`,
+            color: remainingCount > 0 ? '#6ee7b7' : '#fca5a5',
+          }}
+        >
+          {remainingCount > 0
+            ? `🎮 今日あと ${remainingCount} 回プレイできます`
+            : '⛔ 本日の無料プレイ終了（明日リセット）'}
+        </span>
+      </div>
+
       <button
         onClick={() => setCurrentScreen("modeSelect")}
-        className="mb-10 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-10 py-4 rounded-2xl text-2xl shadow-xl hover:from-green-500 hover:to-blue-600"
+        disabled={remainingCount === 0}
+        className="mb-10 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold px-10 py-4 rounded-2xl text-2xl shadow-xl hover:from-green-500 hover:to-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         スタート
       </button>
